@@ -48,18 +48,13 @@ class Solution {
     public void rotate(int[][] matrix) {
         int l = matrix.length;
         int ll = l - 1;
-        int[] tmp = new int[4];
-        for (int y = 0; y < l / 2; y++) {
-            for (int x = 0; x < (l + 1) / 2; x++) {
-                tmp[0] = matrix[y][x];
-                tmp[1] = matrix[x][ll - y];
-                tmp[2] = matrix[ll - y][ll - x];
-                tmp[3] = matrix[ll - x][y];
-
-                matrix[y][x] = tmp[3];
-                matrix[x][ll - y] = tmp[0];
-                matrix[ll - y][ll - x] = tmp[1];
-                matrix[ll - x][y] = tmp[2];
+        for (int y = 0; y < l/2; y++) {
+            for (int x = 0;x < (l + 1)/2; x++) {
+                int tmp = matrix[y][x];
+                matrix[y][x] = matrix[ll - x][y];
+                matrix[ll - x][y] = matrix[ll - y][ll - x];
+                matrix[ll - y][ll - x] = matrix[x][ll - y];
+                matrix[x][ll - y] = tmp;
             }
         }
     }
