@@ -27,7 +27,7 @@ class Solution:
         ans = ''
         for i in range(len(s)):
             s1 = is_pal(i, i)
-            s2= is_pal(i, i + 1)
+            s2 = is_pal(i, i + 1)
             ans = max(ans, s1, s2, key = lambda x: len(x))
         return ans
 ```
