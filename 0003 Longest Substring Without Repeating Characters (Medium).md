@@ -26,7 +26,16 @@ Explanation: The answer is "wke", with the length of 3.
 
 ## Python
 ``` python
-
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        subs_dict = dict()
+        start = len_max = 0
+        for i, char in enumerate(s):
+            if char in subs_dict and subs_dict[char] >= start:
+                start = subs_dict[char] + 1
+            len_max = max(len_max, i - start +1)
+            subs_dict[char] = i
+        return len_max
 ```
 
 ## Java
