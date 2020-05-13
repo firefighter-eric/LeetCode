@@ -30,15 +30,15 @@ class Solution:
                     '8': ('t', 'u', 'v'),
                     '9': ('w', 'x', 'y' ,'z')}
         
-        def func(s, i):
+        def backtrack(s, i):
             if i == len(digits):
                 ans.append(s)
                 return
             for c in int2char[digits[i]]:
-                func(s + c, i + 1)
+                backtrack(s + c, i + 1)
         
         ans = []        
-        func('', 0)
+        backtrack('', 0)
         return ans
 ```
 
