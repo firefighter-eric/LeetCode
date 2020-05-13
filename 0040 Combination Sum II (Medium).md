@@ -38,24 +38,27 @@ A solution set is:
 ## Java
 ``` java
 class Solution {
-    List<List<Integer>> ans = new ArrayList();
+    List<List<Integer>> ans;
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        ans = new ArrayList();
         Arrays.sort(candidates);
-        Stack<Integer> res = new Stack<>();
-        backtrack(res, 0, candidates, target);
+        backtrack(new ArrayList(), 0, candidates, target);
         return ans;
 }
     
-    private void backtrack(Stack<Integer> res, int start, int[] candidates, int target) {
-        if (target == 0 && !ans.contains(res)) {
+    private void backtrack(List<Integer> res, int i, int[] candidates, int target) {
+        if (target == 0) {
             ans.add(new ArrayList(res));
-        } else {
-            for (int i = start; i < candidates.length; i++) {
-                int c = candidates[i];
-                if (c <= target) {
-                    res.push(c);
-                    backtrack(res, i + 1, candidates, target - c);
-                    res.pop();
+            return;
+        }
+        for (; i < candidates.length; i++) {
+            int c = candidates[i];
+            if (c <= target) {
+                res.add(c);
+                backtrack(res, i + 1, candidates, target - c);
+                res.remove(res.size() - 1);
+                while (i + 1 < candidates.length && candidates[i] == candidates[i + 1]) {
+                    i++;
                 }
             }
         }
