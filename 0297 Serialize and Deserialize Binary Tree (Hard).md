@@ -19,6 +19,7 @@ Clarification: The above format is the same as how LeetCode serializes a binary 
 
 Note: Do not use class member/global/static variables to store states. Your serialize and deserialize algorithms should be stateless.
 ## Python
+### 1 DFS
 ``` python
 # Definition for a binary tree node.
 # class TreeNode(object):
@@ -42,7 +43,40 @@ class Codec:
                 arr.append(str(node.val))
                 helper(arr, node.left)
                 helper(arr, node.right)
+        
+        arr = []
+        helper(arr, root)
+        return ','.join(arr)
+
+    def deserialize(self, data):
+        """Decodes your encoded data to tree.
+        :type data: str
+        :rtype: TreeNode
+        """
+        def helper(arr):
+            val = arr.pop()
+            if val == 'None':
+                return None
+            node = TreeNode(int(val))
+            node.left = helper(arr)
+            node.right = helper(arr)
+            return node
+        
+        # if data == '':
+        #     return None
+        arr = data.split(',')[::-1]
+        return helper(arr)
+
+# Your Codec object will be instantiated and called as such:
+# codec = Codec()
+# codec.deserialize(codec.serialize(root))
 ```
+
+### BFS
+``` pyhton
+
+```
+
 
 ## Java
 ``` java
